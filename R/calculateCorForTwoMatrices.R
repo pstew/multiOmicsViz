@@ -31,8 +31,8 @@ calculateCorForTwoMatrices <- function(matrix1,matrix2,fdr){
   matrix1 <- matrix1[,ov_sample]
   matrix2 <- matrix2[,ov_sample]
   
-  suppressWarnings(corrArray <- cor(t(matrix1),t(matrix2),method="spearman"))
-  corrArray[is.na(corrArray)] <- 0
+  suppressWarnings(corrArray <- cor(t(matrix1),t(matrix2),method="spearman", use = "pairwise.complete.obs"))
+  #corrArray[is.na(corrArray)] <- 0
 
   n <- t(!is.na(t(matrix1))) %*% (!is.na(t(matrix2)))
   suppressWarnings(t <- (corrArray * sqrt(n - 2))/sqrt(1 - corrArray^2))
